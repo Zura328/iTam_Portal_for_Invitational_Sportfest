@@ -15,12 +15,11 @@ Route::prefix('admin')->middleware('guest:admin')->group(function () {
 
 Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
-    //admin.dashbaord
+    //admin.dashboard
 
     Route::get('/dashboard', function () {
-        return view('admin.dashboard');
+        return view('admin.dashboard'); 
     })->name('admin.dashboard');
 
-    Route::post('logout', [LoginController::class, 'destroy'])
-                ->name('admin.logout');
+    Route::post('logout', [LoginController::class, 'destroy']) ->name('admin.logout');
 });
