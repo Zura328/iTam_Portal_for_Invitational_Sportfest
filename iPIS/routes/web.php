@@ -2,14 +2,12 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/user-management', function () {
-    return view('user-management');
-});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -23,3 +21,6 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 require __DIR__.'/admin-auth.php';
+
+
+Route::get('/user-management', [UserController::class, 'index']);

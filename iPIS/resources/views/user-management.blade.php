@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>User Management</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <body class="bg-gray-100">
+<head>
+    <title>User Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="bg-gray-100">
     <div class="container mx-auto p-4">
         <div class="bg-white rounded-lg shadow-lg p-8">
             <div class="flex justify-between items-center mb-4">
@@ -32,7 +32,6 @@
             <table class="w-full border-collapse bg-white text-left">
                 <thead>
                     <tr>
-                        <th class="border-b py-2 px-4">PHOTO</th>
                         <th class="border-b py-2 px-4">NAME</th>
                         <th class="border-b py-2 px-4">EMAIL</th>
                         <th class="border-b py-2 px-4">ROLE</th>
@@ -42,38 +41,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="border-b py-2 px-4"><img src="https://via.placeholder.com/40" alt="Admin" class="rounded-full"></td>
-                        <td class="border-b py-2 px-4">Admin</td>
-                        <td class="border-b py-2 px-4"><a href="mailto:admin@argon.com" class="text-blue-500">admin@argon.com</a></td>
-                        <td class="border-b py-2 px-4">Admin</td>
-                        <td class="border-b py-2 px-4">09/08/2021 05:24</td>
-                    </tr>
-                    <tr>
-                        <td class="border-b py-2 px-4"><img src="https://via.placeholder.com/40" alt="Creator" class="rounded-full"></td>
-                        <td class="border-b py-2 px-4">Creator</td>
-                        <td class="border-b py-2 px-4"><a href="mailto:creator@argon.com" class="text-blue-500">creator@argon.com</a></td>
-                        <td class="border-b py-2 px-4">Creator</td>
-                        <td class="border-b py-2 px-4">09/08/2021 05:24</td>
-                    </tr>
-                    <tr>
-                        <td class="border-b py-2 px-4"><img src="https://via.placeholder.com/40" alt="Member" class="rounded-full"></td>
-                        <td class="border-b py-2 px-4">Member</td>
-                        <td class="border-b py-2 px-4"><a href="mailto:member@argon.com" class="text-blue-500">member@argon.com</a></td>
-                        <td class="border-b py-2 px-4">Member</td>
-                        <td class="border-b py-2 px-4">09/08/2021 05:24</td>
-                    </tr>
-                    <tr>
-                        <td class="border-b py-2 px-4"><img src="https://via.placeholder.com/40" alt="Pedro" class="rounded-full"></td>
-                        <td class="border-b py-2 px-4">Pedro</td>
-                        <td class="border-b py-2 px-4"><a href="mailto:pdro.saraiva@gmail.com" class="text-blue-500">pdro.saraiva@gmail.com</a></td>
-                        <td class="border-b py-2 px-4">Admin</td>
-                        <td class="border-b py-2 px-4">11/08/2021 18:50</td>
-                    </tr>
+                    @foreach ($allUsers as $user)
+                        <tr>
+                            <td class="border-b py-2 px-4">{{ $user->name }}</td>
+                            <td class="border-b py-2 px-4">
+                                <a href="mailto:{{ $user->email }}" class="text-blue-500">{{ $user->email }}</a>
+                            </td>
+                            <td class="border-b py-2 px-4">{{ get_class($user) == 'App\Models\Admin' ? 'Admin' : 'User' }}</td>
+                            <td class="border-b py-2 px-4">{{ $user->created_at }}</td>
+                            <td class="border-b py-2 px-4">{{ $user->verified_at }}</td>
+                            <td class="border-b py-2 px-4">Action</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
             <div class="mt-4 flex justify-between items-center">
-                <p class="text-gray-600">Showing 1 to 4 of 4 entries</p>
+                <p class="text-gray-600">Showing {{ $allUsers->count() }} entries</p>
                 <div class="flex items-center">
                     <button class="border border-gray-300 p-2 rounded-l">Previous</button>
                     <button class="border-t border-b border-gray-300 p-2">1</button>
@@ -83,5 +66,4 @@
         </div>
     </div>
 </body>
-    </head>
 </html>
