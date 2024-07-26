@@ -20,30 +20,28 @@
     @vite('resources/js/app.js')
 </head>
 
-<body class="font-sans antialiased bg-gray-100 min-h-screen flex">
-    <!-- Page Container -->
-    <div class="flex w-full">
-        <!-- Sidebar -->
+<body class="font-sans antialiased bg-gray-100 min-h-screen flex flex-col lg:flex-row">
+    <!-- Sidebar -->
+    <div class="w-full lg:w-4/12  min-h-screen">
         @include('layouts.sidebar')
-
-        <!-- Main Content -->
-        <main class="flex flex-col flex-grow w-full">
-            <div class="flex flex-col min-h-screen">
-                <!-- Page Heading -->
-                <header class="bg-white shadow">
-                    <!-- Include any header content here -->
-                </header>
-
-                <!-- Page Content -->
-                <div class="flex-grow">
-                    {{ $slot }}
-                </div>
-
-                <!-- Footer -->
-                @include('layouts.footer')
-            </div>
-        </main>
     </div>
+    <!-- Main Content -->
+    <main class="flex flex-col flex-grow px-10 py-5">
+        <div class="flex flex-col min-h-screen">
+            <!-- Page Heading -->
+            <header class="bg-white shadow">
+                <!-- Include any header content here -->
+            </header> 
+
+            <!-- Page Content -->
+            <div class="flex-grow">
+                {{ $slot }}
+            </div>
+
+            <!-- Footer -->
+            @include('layouts.footer')
+        </div>
+    </main>
 </body>
 
 </html>

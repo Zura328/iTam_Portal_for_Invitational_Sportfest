@@ -10,7 +10,6 @@
         height: 100vh;
         width: 100%;
         /* Full width for smaller screens */
-        max-width: 280px;
         /* Maximum width for larger screens */
         position: ;
         /* Fixed position for sidebar */
@@ -103,7 +102,7 @@
     }
 </style>
 
-<div id="sidebar" class="flex flex-col flex-grow min-h-screen p-3 text-white">
+<div id="sidebar" class="flex flex-col flex-grow min-h-screen p-3 text-white sticky">
     <a href="/" class="d-flex side-head align-items-center mb-3 mb-md-3 me-md-auto text-white text-decoration-none">
         <img width="50" height="32" class="img-fluid" src="/images/userlogo.png" />
         <span class="fs-4">ITAM INVITATIONAL SPORTFEST COMPILER</span>
