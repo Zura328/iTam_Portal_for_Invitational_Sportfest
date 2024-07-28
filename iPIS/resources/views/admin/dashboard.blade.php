@@ -12,7 +12,7 @@
                     <h4>Admin Dashboard Page</h4>
                     
                     <!-- Authentication -->
-                <form method="POST" action="{{ route('admin.logout') }}">
+                    <form method="POST" action="{{ route('admin.logout') }}">
                     @csrf
 
                     <x-responsive-nav-link :href="route('logout')"
