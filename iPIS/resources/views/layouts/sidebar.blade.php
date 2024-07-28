@@ -1,3 +1,4 @@
+<script src="https://cdn.tailwindcss.com"></script>
 <style>
     #sidebar {
         background-image: url('{{ asset('images/Players1.png') }}'), linear-gradient(#1E7E41, #0F622D);
@@ -167,3 +168,5 @@
     </div>
 </div>
 <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+
+

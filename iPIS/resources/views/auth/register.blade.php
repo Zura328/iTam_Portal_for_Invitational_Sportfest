@@ -30,56 +30,77 @@
                     @csrf
                     <div class="wizard-step" id="step-1">
                         <div class="mb-4 flex space-x-4">
+                            <!-- first_name -->
                             <div class="w-1/2">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="first_name">First Name</label>
-                                <input type="text" id="first_name" name="first_name"
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    required>
+                                <x-input-label for="first_name" :value="__('First Name')" class="block text-gray-700 text-sm font-bold mb-2" />
+                                <x-text-input id="first_name" name="first_name"
+                                              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                              type="text" :value="old('first_name')" required autofocus autocomplete="first_name" />
+                                <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
                             </div>
+                            
+                            <!-- last_name -->
                             <div class="w-1/2">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="last_name">Last Name</label>
-                                <input type="text" id="last_name" name="last_name"
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    required>
+                                <x-input-label for="last_name" :value="__('Last Name')" class="block text-gray-700 text-sm font-bold mb-2" />
+                                <x-text-input id="last_name" name="last_name"
+                                              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                              type="text" :value="old('last_name')" required autofocus autocomplete="last_name" />
+                                <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
                             </div>
+                            
                         </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email Address</label>
-                            <input type="email" id="email" name="email"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                required>
+                          <!-- Email Address -->
+                          <div class="mb-4">
+                            <x-input-label for="email" :value="__('Email Address')" class="block text-gray-700 text-sm font-bold mb-2" />
+                            <x-text-input id="email" name="email"
+                                          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                          type="email" :value="old('email')" required autocomplete="email" />
+                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
+                        
+                        <!-- Birth_date-->
                         <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="birth_date">Birth Date</label>
-                            <input type="date" id="birth_date" name="birth_date"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                required>
-                        </div>
+                            <x-input-label for="birth_date" :value="__('Birth Date')" class="block text-gray-700 text-sm font-bold mb-2" />
+                            <x-text-input id="birth_date" name="birth_date"
+                                          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                          type="date" :value="old('birth_date')" required autocomplete="bdate" />
+                            <x-input-error :messages="$errors->get('birth_date')" class="mt-2" />
+                        </div>                        
+                        <!--Gender-->
                         <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="gender">Gender</label>
+                            <x-input-label for="gender" :value="__('Gender')" class="block text-gray-700 text-sm font-bold mb-2" />
                             <select id="gender" name="gender"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                required>
-                                <option value="">Select Gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="other">Other</option>
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    required>
+                                <option value="" disabled selected>Select Gender</option>
+                                <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
+                                <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
+                                <option value="other" {{ old('gender') == 'other' ? 'selected' : '' }}>Other</option>
                             </select>
+                            <x-input-error :messages="$errors->get('gender')" class="mt-2" />
                         </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
-                            <input type="password" id="password" name="password"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                required>
+                        
+                          <!-- Password -->
+                          <div class="mb-4">
+                            <x-input-label for="password" :value="__('Password')" class="block text-gray-700 text-sm font-bold mb-2" />
+                            <x-text-input id="password" name="password"
+                                          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                          type="password" required autocomplete="new-password" />
+                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="confirm_password">Confirm Password</label>
-                            <input type="password" id="confirm_password" name="confirm_password"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                required>
+                         <!-- Confirm Password -->
+                         <div class="mb-4">
+                            <x-input-label for="password_confirmation" :value="__('Confirm Password')" class="block text-gray-700 text-sm font-bold mb-2" />
+                            <x-text-input id="password_confirmation" name="password_confirmation"
+                                          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                          type="password" required autocomplete="new-password" />
+                            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                         </div>
-                        <button type="submit"
-                            class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Submit</button>
+                        <!-- Register -->
+                        <x-primary-button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                                {{ __('Register') }}
+                        </x-primary-button>
+
                     </div>
                 </form>
             </div>
