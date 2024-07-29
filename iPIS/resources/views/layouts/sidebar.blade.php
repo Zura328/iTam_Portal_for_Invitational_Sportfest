@@ -1,7 +1,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
     #sidebar {
-        background-image: url('{{ asset('images/Players1.png') }}'), linear-gradient(#1E7E41, #0F622D);
+        background-image: url('{{ asset('imagecds/Players1.png') }}'), linear-gradient(#1E7E41, #0F622D);
         background-size: cover;
         /* Cover the entire container */
         background-position: center;
@@ -128,19 +128,19 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link text-white">
+            <a href="{{ route('my-documents') }}" class="nav-link text-white">
                 <ion-icon name="document"></ion-icon>
                 My Documents
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link text-white">
+            <a href="{{ route('my-calendar') }}" class="nav-link text-white">
                 <ion-icon name="people"></ion-icon>
                 My Calendar
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link text-white">
+            <a href="{{ route('my-players') }}" class="nav-link text-white">
                 <ion-icon name="people"></ion-icon>
                 My Players
             </a>
