@@ -27,6 +27,6 @@ class AdminController extends Controller
     }
 
     public function coachApproval() {
-        return view('admin-sidebar.coach-approval');
+        return view('admin.admin-sidebar.coach-approval');
     }
 }
