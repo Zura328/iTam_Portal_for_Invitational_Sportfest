@@ -2,7 +2,7 @@
     <section class="flex flex-col w-full">
         <div class="m-auto bg-green-700 text-white w-full lg:w-1/2 p-5 rounded-xl">
             <h1 class="text-center font-bold">Add Team</h1>
-            <form id="team-form" class="p-5">
+            <form id="team-form" class="p-5" type="POST">
                 <div class="w-full">
                     <label for="teamname" class="block text-sm font-medium leading-6">Team Name</label>
                     <div class="mt-2">
@@ -33,12 +33,12 @@
                             class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-slate-600">
                             <select name="sportcategory" id="sportcategory"
                                 class="block flex-1 border-1 rounded-md bg-transparent py-1.5 pl-1 text-white w-full placeholder:text-slate-300 focus:ring-0 sm:text-sm sm:leading-6">
-                                <option class=" text-black" value="" disabled selected>Select a Sport Category
+                                <option class="text-black" value="" disabled selected>Select a Sport Category
                                 </option>
-                                <option class=" text-black" value="basketball">Basketball</option>
-                                <option class=" text-black" value="soccer">Soccer</option>
-                                <option class=" text-black" value="baseball">Baseball</option>
-                                <option class=" text-black" value="tennis">Tennis</option>
+                                <option class="text-black" value="basketball">Basketball</option>
+                                <option class="text-black" value="soccer">Soccer</option>
+                                <option class="text-black" value="baseball">Baseball</option>
+                                <option class="text-black" value="tennis">Tennis</option>
                             </select>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
             </div>
             <div class="w-full flex justify-center">
                 <button id="add-player-btn-modal"
-                    class="hover:bg-green-700 mt-2 hover:text-white transition duration-200 px-4 py-2 rounded-full border"
+                    class="hover:bg-green-700 mt-2 hover:text-white transition duration-200 px-4 py-1 rounded-full border"
                     type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <span class="bg-green-700 text-white rounded-full px-1">+</span> Add Player
                 </button>
@@ -61,12 +61,12 @@
         </div>
         <div class="w-full flex justify-center mt-4">
             <button id="submit"
-                class="bg-green-700 font-bold text-white transition duration-200 px-4 py-2 rounded-full border">
+                class="bg-green-700 font-bold text-white transition duration-200 px-4 py-1 rounded-full border">
                 Proceed
             </button>
         </div>
 
-        <!-- Modal -->
+        <!-- Add Player Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -108,14 +108,64 @@
                 </div>
             </div>
         </div>
+
+        <!-- Edit Player Modal -->
+        <div class="modal fade" id="editPlayerModal" tabindex="-1" aria-labelledby="editPlayerModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editPlayerModalLabel">Edit Player</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="edit-player-form">
+                            <div class="mb-3">
+                                <label for="editFirstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="editFirstName" name="edit_first_name"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editMiddleName" class="form-label">Middle Name</label>
+                                <input type="text" class="form-control" id="editMiddleName"
+                                    name="edit_middle_name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editLastName" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="editLastName" name="edit_last_name"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editBirthday" class="form-label">Birthday</label>
+                                <input type="date" class="form-control" id="editBirthday" name="edit_birthday">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editGender" class="form-label">Gender</label>
+                                <select class="form-select" id="editGender" name="edit_gender">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" id="save-edit-player-btn" class="btn btn-primary">Save
+                            Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <script>
         // Initialize player array
-        var player = [];
+        var players = [];
         var counter = 0;
+
         document.getElementById('save-player-btn').addEventListener('click', function() {
-            if(counter==0){
+            if (counter == 0) {
                 document.getElementById('hidethis').style.display = 'none';
                 counter++;
             }
@@ -127,24 +177,31 @@
             var gender = document.getElementById('gender').value;
 
             // Create a player object
-            var newPlayer = [firstName, middleName, lastName, birthday, gender];
+            var newPlayer = {
+                firstName,
+                middleName,
+                lastName,
+                birthday,
+                gender
+            };
 
             // Add the new player to the player array
-            player.push(newPlayer);
+            players.push(newPlayer);
 
             // Add the new player to the team members list
             var playerList = document.getElementById('team-members-list');
             var playerItem = document.createElement('div');
             playerItem.className = 'p-4 mb-4 border rounded flex';
             playerItem.innerHTML = `
-                <div class="w-10/12">
+                <div class="w-7/12">
                     <p class="text-green-700"><strong>${firstName} ${lastName}</strong></p>
                     <p>${middleName}</p>
                     <p>${birthday}</p>
                     <p>${gender}</p>
                 </div>
-                <div class="w-2/12">
-                    <button class="bg-green-700 text-white px-4 py-2 rounded-full w-full">Edit</button>
+                <div class="w-5/12 flex justify-between">
+                    <button class="bg-green-700 text-white px-4 py-1 rounded-full edit-player-btn" data-index="${players.length - 1}" data-bs-toggle="modal" data-bs-target="#editPlayerModal">Edit</button>
+                    <button class="bg-red-700 text-white px-4 py-1 rounded-full remove-player-btn" data-index="${players.length - 1}">Remove</button>
                 </div>
             `;
             playerList.appendChild(playerItem);
@@ -157,6 +214,84 @@
             document.getElementById('player-form').reset();
         });
 
+        // Edit player button click event
+        document.getElementById('team-members-list').addEventListener('click', function(e) {
+            if (e.target && e.target.classList.contains('edit-player-btn')) {
+                var index = e.target.getAttribute('data-index');
+                var player = players[index];
+
+                // Fill the edit form with player data
+                document.getElementById('editFirstName').value = player.firstName;
+                document.getElementById('editMiddleName').value = player.middleName;
+                document.getElementById('editLastName').value = player.lastName;
+                document.getElementById('editBirthday').value = player.birthday;
+                document.getElementById('editGender').value = player.gender;
+
+                // Save the index in the save button
+                document.getElementById('save-edit-player-btn').setAttribute('data-index', index);
+            }
+        });
+
+        // Save changes in the edit modal
+        document.getElementById('save-edit-player-btn').addEventListener('click', function() {
+            var index = this.getAttribute('data-index');
+            var player = players[index];
+
+            // Get edited details from the form
+            player.firstName = document.getElementById('editFirstName').value;
+            player.middleName = document.getElementById('editMiddleName').value;
+            player.lastName = document.getElementById('editLastName').value;
+            player.birthday = document.getElementById('editBirthday').value;
+            player.gender = document.getElementById('editGender').value;
+
+            // Update the player in the array
+            players[index] = player;
+
+            // Update the player in the list
+            var playerList = document.getElementById('team-members-list');
+            var playerItems = playerList.getElementsByClassName('p-4 mb-4 border rounded flex');
+            var playerItem = playerItems[index];
+            playerItem.innerHTML = `
+                <div class="w-7/12">
+                    <p class="text-green-700"><strong>${player.firstName} ${player.lastName}</strong></p>
+                    <p>${player.middleName}</p>
+                    <p>${player.birthday}</p>
+                    <p>${player.gender}</p>
+                </div>
+                <div class="w-5/12 flex justify-between">
+                    <button class="bg-green-700 text-white px-4 py-1 rounded-full edit-player-btn" data-index="${index}" data-bs-toggle="modal" data-bs-target="#editPlayerModal">Edit</button>
+                    <button class="bg-red-700 text-white px-4 py-1 rounded-full remove-player-btn" data-index="${index}">Remove</button>
+                </div>
+            `;
+
+            // Close the modal
+            var modal = bootstrap.Modal.getInstance(document.getElementById('editPlayerModal'));
+            modal.hide();
+        });
+
+        // Remove player button click event
+        document.getElementById('team-members-list').addEventListener('click', function(e) {
+            if (e.target && e.target.classList.contains('remove-player-btn')) {
+                var index = e.target.getAttribute('data-index');
+
+                // Remove the player from the array
+                players.splice(index, 1);
+
+                // Remove the player from the list
+                var playerList = document.getElementById('team-members-list');
+                playerList.removeChild(e.target.parentNode.parentNode);
+
+                // Re-index the remaining players and update the data-index attributes
+                var playerItems = playerList.getElementsByClassName('p-4 mb-4 border rounded flex');
+                for (var i = 0; i < playerItems.length; i++) {
+                    var editButton = playerItems[i].getElementsByClassName('edit-player-btn')[0];
+                    var removeButton = playerItems[i].getElementsByClassName('remove-player-btn')[0];
+                    editButton.setAttribute('data-index', i);
+                    removeButton.setAttribute('data-index', i);
+                }
+            }
+        });
+
         document.getElementById('submit').addEventListener('click', function() {
             // Get team form data
             var teamForm = document.getElementById('team-form');
@@ -165,75 +300,41 @@
                 teamName: formData.get('teamname'),
                 teamAcronym: formData.get('teamacro'),
                 sportCategory: formData.get('sportcategory'),
-                players: player
+                players: players
             };
 
             // Submit teamData (e.g., send it to the server)
             console.log('Submitting team data:', teamData);
-
-            // Perform AJAX or fetch request to send data to the server
-            // Example:
-            /*
-            fetch('/save-team', {
-                method: 'POST',
+            $.ajaxSetup({
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: '/save-team',
+                type: 'POST',
+                data: JSON.stringify(teamData),
+                success: function(response) {
+                    alert(response.message);
+                    window.location.href = "{{ route('dashboard') }}";
                 },
-                body: JSON.stringify(teamData)
-            }).then(response => response.json())
-              .then(data => console.log(data))
-              .catch(error => console.error('Error:', error));
-            */
-
-            /*
-            //sample controller
-            {
-        // Validate the incoming request
-        $request->validate([
-            'teamName' => 'required|string|max:255',
-            'teamAcronym' => 'required|string|max:5',
-            'sportCategory' => 'required|string',
-            'players' => 'array',
-            'players.*.0' => 'required|string|max:255', // first_name
-            'players.*.1' => 'nullable|string|max:255', // middle_name
-            'players.*.2' => 'required|string|max:255', // last_name
-            'players.*.3' => 'nullable|date', // birthday
-            'players.*.4' => 'nullable|string|in:Male,Female' // gender
-        ]);
-
-        // Create or find the team
-        $team = Team::updateOrCreate(
-            ['name' => $request->input('teamName')],
-            [
-                'acronym' => $request->input('teamAcronym'),
-                'sport_category' => $request->input('sportCategory')
-            ]
-        );
-
-        // Save players
-        if ($request->has('players')) {
-            foreach ($request->input('players') as $playerData) {
-                Player::updateOrCreate(
-                    [
-                        'team_id' => $team->id,
-                        'first_name' => $playerData[0],
-                        'last_name' => $playerData[2]
-                    ],
-                    [
-                        'middle_name' => $playerData[1],
-                        'birthday' => $playerData[3],
-                        'gender' => $playerData[4]
-                    ]
-                );
-            }
-        }
-
-        // Return a response
-        return response()->json(['message' => 'Team and players saved successfully!']);
-    }
-            
-            */
+                error: function(xhr) {
+                    if (xhr.status === 422) {
+                        // Validation error
+                        var errors = xhr.responseJSON.errors;
+                        var errorMessage = 'Validation Error:\n';
+                        for (var field in errors) {
+                            if (errors.hasOwnProperty(field)) {
+                                errorMessage += errors[field].join('\n') + '\n';
+                            }
+                        }
+                        alert(errorMessage);
+                    } else {
+                        alert('Error saving Team data');
+                    }
+                }
+            });
         });
     </script>
 

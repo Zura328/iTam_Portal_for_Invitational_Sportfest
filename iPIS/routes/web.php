@@ -38,7 +38,10 @@ Route::prefix('admin')->middleware(['auth:admin'])->group(function () {
     Route::get('/coach-approval', [AdminController::class, 'coachApproval'])->name('admin.coach-approval');
 });
 
-Route::get('/testing-site', [TestingController::class, 'test'])->name('test.');
+Route::post('/testing-site', [TestingController::class, 'test'])->name('test.');
+
+//Route for save team
+Route::post('/save-team', [TestingController::class, 'addteam'])->name('test.addteam');
 
 require __DIR__.'/auth.php';
 require __DIR__.'/admin-auth.php';
