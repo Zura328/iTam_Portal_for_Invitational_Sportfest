@@ -42,7 +42,7 @@
                                 </div>
                                 <div><img width="15" class="img-fluid" src="/images/userlogo.png" /></div>
                             </div>
-                            <div class="w-4 /12 text-end">
+                            <div class="w-4/12 text-end">
                                 <p class="font-bold">Sept. 11, 2024</p>
                             </div>
                         </li>

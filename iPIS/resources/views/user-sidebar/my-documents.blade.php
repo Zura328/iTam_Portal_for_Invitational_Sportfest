@@ -1,8 +1,9 @@
-@extends('layouts.sidebar')
+<x-app-layout>
 
-@section('content')
-    <div class="container mx-auto">
-        <h1 class="text-2xl font-bold">My Documents</h1>
-        <p>Manage your documents here.</p>
-    </div>
-@endsection
+    
+    
+    
+    <section class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        
+    </section>
+</x-app-layout>
