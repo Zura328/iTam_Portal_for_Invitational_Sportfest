@@ -2,8 +2,8 @@
     <section class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         
     </section>
-</x-app-layout>
-<x-app-layout>
+
+
     <section class="grid grid-cols-1">
         <h1 class="font-bold mb-2 text-3xl">Document Requirements</h1>
         <h3>Manage and Organize Team Documents</h3>
@@ -31,7 +31,7 @@
                     <div class="col-span-4">{{ $a[1] }}</div>
                     <div class="col-span-3 @switch($a[2])
                             @case(1)
-                                text-green-600
+                                text-green-700
                             @break
 
                             @case(0)
