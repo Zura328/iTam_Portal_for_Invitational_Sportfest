@@ -1,7 +1,9 @@
-@extends('layouts.sidebar')
+<x-app-layout>
 
-@section('content')
-    <div class="container mx-auto">
-        <h1 class="text-2xl font-bold">User Management</h1>
-        <p>User Management tools</p>
-    </div>
+        @section('content')
+            <div class="container mx-auto">
+                <h1 class="text-2xl font-bold">User Management</h1>
+                <p>User Management tools</p>
+            </div>
+        @endsection
+</x-app-layout>
