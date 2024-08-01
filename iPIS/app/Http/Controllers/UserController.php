@@ -16,6 +16,11 @@ class UserController extends Controller
         return view('user-sidebar.my-documents');
     }
 
+    public function myDocuments_sub($type)
+    {
+        return view('user-sidebar.my-documents.sub',compact('type'));
+    }
+
     public function myCalendar()
     {
         return view('user-sidebar.my-calendar');
