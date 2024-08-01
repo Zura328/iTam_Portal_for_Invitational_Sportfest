@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth','verified'])->group(function () {
     Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard');
     Route::get('/my-documents', [UserController::class, 'myDocuments'])->name('my-documents');
+    Route::get('/my-documents/{type}', [UserController::class, 'myDocuments_sub'])->name('my-documents_sub');
     Route::get('/my-calendar', [UserController::class, 'myCalendar'])->name('my-calendar');
     Route::get('/my-players', [UserController::class, 'myPlayers'])->name('my-players');
 });
