@@ -10,7 +10,6 @@ class UserController extends Controller
     {
         return view('dashboard');
     }
-
     public function myDocuments()
     {
         return view('user-sidebar.my-documents');
@@ -18,7 +17,29 @@ class UserController extends Controller
 
     public function myDocuments_sub($type)
     {
+<<<<<<< HEAD
         return view('user-sidebar.my-documents.sub',compact('type'));
+=======
+        switch ($type) {
+            case 'CertificateOfRegistration':
+                return view('user-sidebar.my-documents.CertificateOfRegistration');
+            case 'GalleryOfCoaches':
+                return view('user-sidebar.my-documents.GalleryOfCoaches');
+            case 'GalleryOfPlayers':
+                return view('user-sidebar.my-documents.GalleryOfPlayers');
+            case 'ParentalConsent':
+                return view('user-sidebar.my-documents.ParentalConsent');
+            case 'SummaryOfPlayers':
+                return view('user-sidebar.my-documents.SummaryOfPlayers');
+            case 'PhotocopyOfVaccineCard':
+                return view('user-sidebar.my-documents.PhotocopyOfVaccineCard');
+            case 'PhotocopyOfSchoolID':
+                return view('user-sidebar.my-documents.PhotocopyOfSchoolID');
+            default:
+                return redirect()->route('my-documents');
+        }
+        //return view('user-sidebar.my-documents.sub',compact('type'));
+>>>>>>> upstream/dev
     }
 
     public function myCalendar()

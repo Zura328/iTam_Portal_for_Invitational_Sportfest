@@ -77,4 +77,8 @@
             @endforeach
         </div>
     </section>
+<<<<<<< HEAD
 </x-app-layout>
+=======
+</x-app-layout>
+>>>>>>> upstream/dev
